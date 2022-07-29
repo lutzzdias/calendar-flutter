@@ -16,10 +16,9 @@ class HomeButton extends StatelessWidget {
         color: Colors.blueAccent,
         borderRadius: BorderRadius.circular(10),
       ),
-      constraints: const BoxConstraints.expand(height: 100),
       child: TextButton(
         style: TextButton.styleFrom(
-            minimumSize: const Size.fromHeight(100),
+            minimumSize: const Size.fromHeight(75),
             alignment: Alignment.centerLeft),
         child: Text(
           title,
