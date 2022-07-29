@@ -1,4 +1,4 @@
-import 'package:calendar/Presentation/Pages/test_page.dart';
+import 'package:calendar/Presentation/Pages/day_page.dart';
 import 'package:flutter/material.dart';
 
 class CalendarDay extends StatelessWidget {
@@ -9,8 +9,8 @@ class CalendarDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const TestPage())),
+      onTap: () => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => DayPage(day: index + 1))),
       child: Container(
         margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
