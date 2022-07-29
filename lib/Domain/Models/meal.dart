@@ -4,7 +4,12 @@ class Meal {
   String id;
   DateTime date;
   MealType mealType;
-  List<String> foodsIds = List.empty(growable: true);
+  List<String> foodsIds;
 
-  Meal({required this.id, required this.date, required this.mealType});
+  Meal({
+    required this.id,
+    required this.date,
+    required this.mealType,
+    List<String>? foodsIds,
+  }) : foodsIds = foodsIds ?? List.empty(growable: true);
 }
