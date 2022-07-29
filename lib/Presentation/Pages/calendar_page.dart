@@ -8,13 +8,13 @@ class CalendarPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
             childAspectRatio: 10 / 10,
           ),
           itemCount: 31,
           itemBuilder: (context, index) {
-            return Container(
+            return SizedBox(
               width: 50,
               height: 50,
               child: Text("${index + 1}"),
