@@ -19,4 +19,13 @@ class MealDTO {
         date = meal.date,
         mealType = meal.mealType,
         foodsIds = meal.foodsIds;
+
+  Meal toMeal() {
+    return Meal(
+      id: id,
+      date: date,
+      mealType: mealType,
+      foodsIds: foodsIds,
+    );
+  }
 }
