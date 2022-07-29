@@ -1,3 +1,5 @@
+import 'package:calendar/Presentation/Pages/calendar_page.dart';
+import 'package:calendar/Presentation/Pages/test_page.dart';
 import 'package:calendar/Presentation/Widgets/HomePage/home_button.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +12,8 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text("Home Page")),
       body: Column(
         children: const [
-          HomeButton(),
+          HomeButton(title: "Calendário", nextScreen: CalendarPage()),
+          HomeButton(title: "Psicologia", nextScreen: TestPage()),
         ],
       ),
     );

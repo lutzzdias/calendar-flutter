@@ -1,10 +1,10 @@
-import 'package:calendar/Presentation/Pages/calendar_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeButton extends StatelessWidget {
-  const HomeButton({
-    Key? key,
-  }) : super(key: key);
+  final String title;
+  final Widget nextScreen;
+  const HomeButton({Key? key, required this.title, required this.nextScreen})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +21,16 @@ class HomeButton extends StatelessWidget {
         style: TextButton.styleFrom(
             minimumSize: const Size.fromHeight(100),
             alignment: Alignment.centerLeft),
-        child: const Text(
-          "Calendário",
+        child: Text(
+          title,
           textAlign: TextAlign.left,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 30,
           ),
         ),
-        onPressed: () => Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CalendarPage())),
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => nextScreen)),
       ),
     );
   }
