@@ -2,7 +2,7 @@ import 'package:calendar/Domain/Enums/meal_type_enum.dart';
 import 'package:calendar/Domain/Models/meal.dart';
 
 class MealRepository {
-  void createMeal() {
+  void createMeal(Meal meal) {
     // TODO: Implement Create operation in database
   }
 
@@ -13,11 +13,11 @@ class MealRepository {
 
   // TODO: Implement GetAll
 
-  void updateMeal() {
+  void updateMeal(Meal meal) {
     // TODO: Implement Update operation in database
   }
 
-  void deleteMeal() {
+  void deleteMeal(String id) {
     // TODO: Implement Delete operation in database
   }
 }
