@@ -10,11 +10,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Home Page")),
-      body: Column(
-        children: const [
-          HomeButton(title: "Calendário", nextScreen: CalendarPage()),
-          HomeButton(title: "Psicologia", nextScreen: TestPage()),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            HomeButton(title: "Calendário", nextScreen: CalendarPage()),
+            HomeButton(title: "Psicologia", nextScreen: TestPage()),
+            HomeButton(title: "Sono", nextScreen: TestPage()),
+            HomeButton(title: "Medicina", nextScreen: TestPage()),
+            HomeButton(title: "Jogo do Bicho", nextScreen: TestPage()),
+          ],
+        ),
       ),
     );
   }
