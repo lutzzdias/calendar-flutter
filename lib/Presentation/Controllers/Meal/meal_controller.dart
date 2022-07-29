@@ -4,7 +4,7 @@ import 'package:calendar/Domain/DTOs/Meal/meal_dto.dart';
 import 'package:calendar/Domain/DTOs/Meal/meal_response_dto.dart';
 
 class MealController {
-  MealService _mealService = MealService();
+  final MealService _mealService = MealService();
 
   MealResponseDTO createMeal(CreateMealDTO createMealDTO) {
     return _mealService.createMeal(createMealDTO);

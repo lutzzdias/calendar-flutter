@@ -1,5 +1,3 @@
-import 'dart:html';
-
 class Food {
   String id;
   String description;
