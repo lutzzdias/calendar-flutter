@@ -1,3 +1,4 @@
+import 'package:calendar/Presentation/Widgets/CalendarPage/calendar_day.dart';
 import 'package:flutter/material.dart';
 
 class CalendarPage extends StatelessWidget {
@@ -14,11 +15,7 @@ class CalendarPage extends StatelessWidget {
           ),
           itemCount: 31,
           itemBuilder: (context, index) {
-            return SizedBox(
-              width: 50,
-              height: 50,
-              child: Text("${index + 1}"),
-            );
+            return CalendarDay(index: index);
           },
         ),
       ),
