@@ -7,16 +7,24 @@ class CalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Calendário")),
       body: SafeArea(
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 7,
-            childAspectRatio: 10 / 10,
-          ),
-          itemCount: 31,
-          itemBuilder: (context, index) {
-            return CalendarDay(index: index);
-          },
+        child: Column(
+          children: [
+            SizedBox(height: 20),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 7,
+                  childAspectRatio: 10 / 10,
+                ),
+                itemCount: 31,
+                itemBuilder: (context, index) {
+                  return CalendarDay(index: index);
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
