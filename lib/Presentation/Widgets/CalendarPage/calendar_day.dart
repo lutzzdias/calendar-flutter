@@ -14,8 +14,8 @@ class CalendarDay extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
-          border: Border.all(width: 0.2),
-        ),
+            border: Border.all(width: 0.5),
+            borderRadius: BorderRadius.circular(10)),
         width: 50,
         height: 50,
         child: Center(child: Text("${index + 1}")),
