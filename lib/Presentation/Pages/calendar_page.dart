@@ -11,7 +11,7 @@ class CalendarPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
