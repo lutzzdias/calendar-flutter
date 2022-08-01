@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TestPage extends StatelessWidget {
-  const TestPage({Key? key}) : super(key: key);
+  final String title;
+  const TestPage({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text("AFSDFASDFWFDA"),
+        child: Text(title),
       ),
     );
   }

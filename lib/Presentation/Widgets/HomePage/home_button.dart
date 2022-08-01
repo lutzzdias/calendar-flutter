@@ -17,6 +17,7 @@ class HomeButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextButton(
+        onPressed: goToNextPage(context, nextScreen),
         style: TextButton.styleFrom(
             minimumSize: const Size.fromHeight(75),
             alignment: Alignment.centerLeft),
@@ -28,9 +29,12 @@ class HomeButton extends StatelessWidget {
             fontSize: 30,
           ),
         ),
-        onPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => nextScreen)),
       ),
     );
+  }
+
+  void Function() goToNextPage(BuildContext context, Widget nextPage) {
+    return () => Navigator.push(
+        context, MaterialPageRoute(builder: (context) => nextPage));
   }
 }
