@@ -1,3 +1,4 @@
+import 'package:calendar/Domain/Enums/meal_type_enum.dart';
 import 'package:calendar/Domain/Models/day.dart';
 import 'package:calendar/Domain/Models/meal.dart';
 import 'package:calendar/Presentation/Widgets/DayPage/meal_button.dart';
@@ -23,15 +24,34 @@ class _DayPageState extends State<DayPage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const [
+        children: [
           MealButton(
-              title: "Café da manhã", icon: Icon(Icons.breakfast_dining)),
+            title: "Café da manhã",
+            icon: Icon(Icons.breakfast_dining),
+            day: widget.day,
+            mealType: MealType.breakfast,
+          ),
           SizedBox(height: 10),
-          MealButton(title: "Almoço", icon: Icon(Icons.lunch_dining)),
+          MealButton(
+            title: "Almoço",
+            icon: Icon(Icons.lunch_dining),
+            day: widget.day,
+            mealType: MealType.lunch,
+          ),
           SizedBox(height: 10),
-          MealButton(title: "Jantar", icon: Icon(Icons.dinner_dining)),
+          MealButton(
+            title: "Jantar",
+            icon: Icon(Icons.dinner_dining),
+            day: widget.day,
+            mealType: MealType.dinner,
+          ),
           SizedBox(height: 10),
-          MealButton(title: "Lanche", icon: Icon(Icons.fastfood)),
+          MealButton(
+            title: "Lanche",
+            icon: Icon(Icons.fastfood),
+            day: widget.day,
+            mealType: MealType.snack,
+          ),
         ],
       ),
     );
