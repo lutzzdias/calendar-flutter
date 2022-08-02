@@ -19,7 +19,7 @@ class _DayPageState extends State<DayPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.day.date.day}"),
+        title: Text("${widget.day.date!.day}"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -19,7 +19,7 @@ class CalendarDay extends StatelessWidget {
             borderRadius: BorderRadius.circular(10)),
         width: 50,
         height: 50,
-        child: Center(child: Text("${day.date.day}/${day.date.month}")),
+        child: Center(child: Text("${day.date!.day}/${day.date!.month}")),
       ),
     );
   }
