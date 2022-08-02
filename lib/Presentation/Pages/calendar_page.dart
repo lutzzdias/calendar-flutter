@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CalendarPage extends StatelessWidget {
   CalendarPage({Key? key}) : super(key: key);
-  DateTime currentDate = DateTime.now();
+  final DateTime currentDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
