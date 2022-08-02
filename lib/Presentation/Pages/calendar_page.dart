@@ -1,8 +1,10 @@
+import 'package:calendar/Domain/Models/day.dart';
 import 'package:calendar/Presentation/Widgets/CalendarPage/calendar_day.dart';
 import 'package:flutter/material.dart';
 
 class CalendarPage extends StatelessWidget {
-  const CalendarPage({Key? key}) : super(key: key);
+  CalendarPage({Key? key}) : super(key: key);
+  DateTime currentDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,13 @@ class CalendarPage extends StatelessWidget {
                   crossAxisCount: 7,
                   childAspectRatio: 10 / 10,
                 ),
-                itemCount: 31,
+                itemCount:
+                    DateTime(currentDate.year, currentDate.month + 1, 0).day,
                 itemBuilder: (context, index) {
-                  return CalendarDay(index: index);
+                  return CalendarDay(
+                    day: createDayFromDate(DateTime(
+                        currentDate.year, currentDate.month, index + 1)),
+                  );
                 },
               ),
             ),
@@ -28,5 +34,9 @@ class CalendarPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Day createDayFromDate(DateTime date) {
+    return Day(date: date);
   }
 }

@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text("Home Page")),
       body: SingleChildScrollView(
         child: Column(
-          children: const [
+          children: [
             HomeButton(title: "Nutrição", nextScreen: CalendarPage()),
             HomeButton(
                 title: "Psicologia", nextScreen: TestPage(title: "Psicologia")),
