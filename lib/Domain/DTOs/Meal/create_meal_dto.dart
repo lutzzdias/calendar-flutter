@@ -1,22 +1,24 @@
+import 'package:calendar/Domain/Models/food.dart';
 import 'package:calendar/Domain/Models/meal.dart';
+import 'package:objectbox/objectbox.dart';
 
 class CreateMealDTO {
   DateTime date;
   String mealType;
-  List<String> foodsIds;
+  ToMany<Food>? foods;
 
   CreateMealDTO({
     required this.date,
     required this.mealType,
-    List<String>? foodsIds,
-  }) : foodsIds = foodsIds ?? List.empty(growable: true);
+    ToMany<Food>? foods,
+  });
 
   CreateMealDTO.fromMeal(Meal meal)
       : date = meal.date,
         mealType = meal.mealType,
-        foodsIds = meal.foodsIds;
+        foods = meal.foods;
 
   Meal toMeal() {
-    return Meal(date: date, mealType: mealType, foodsIds: foodsIds);
+    return Meal(date: date, mealType: mealType);
   }
 }
