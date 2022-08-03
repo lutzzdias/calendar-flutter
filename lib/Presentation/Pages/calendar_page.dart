@@ -1,4 +1,3 @@
-import 'package:calendar/Domain/Models/day.dart';
 import 'package:calendar/Presentation/Widgets/CalendarPage/calendar_day.dart';
 import 'package:flutter/material.dart';
 
@@ -24,8 +23,8 @@ class CalendarPage extends StatelessWidget {
                     DateTime(currentDate.year, currentDate.month + 1, 0).day,
                 itemBuilder: (context, index) {
                   return CalendarDay(
-                    day: createDayFromDate(DateTime(
-                        currentDate.year, currentDate.month, index + 1)),
+                    date: DateTime(
+                        currentDate.year, currentDate.month, index + 1),
                   );
                 },
               ),
@@ -34,9 +33,5 @@ class CalendarPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Day createDayFromDate(DateTime date) {
-    return Day(date: date);
   }
 }

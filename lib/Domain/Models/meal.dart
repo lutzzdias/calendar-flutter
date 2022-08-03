@@ -1,4 +1,3 @@
-import 'package:calendar/Domain/Models/day.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
@@ -7,7 +6,6 @@ class Meal {
   DateTime date;
   String mealType;
   List<String> foodsIds;
-  final day = ToOne<Day>();
 
   Meal({
     this.id = 0,

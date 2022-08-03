@@ -13,33 +13,11 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'Domain/Models/day.dart';
 import 'Domain/Models/meal.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <ModelEntity>[
-  ModelEntity(
-      id: const IdUid(1, 7735410333144087890),
-      name: 'Day',
-      lastPropertyId: const IdUid(2, 6600495818865029964),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 4252877789476809213),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 6600495818865029964),
-            name: 'date',
-            type: 10,
-            flags: 0)
-      ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[
-        ModelBacklink(name: 'meals', srcEntity: 'Meal', srcField: '')
-      ]),
   ModelEntity(
       id: const IdUid(2, 3004001520556935036),
       name: 'Meal',
@@ -61,13 +39,6 @@ final _entities = <ModelEntity>[
             name: 'foodsIds',
             type: 30,
             flags: 0),
-        ModelProperty(
-            id: const IdUid(4, 7930954151443410082),
-            name: 'dayId',
-            type: 11,
-            flags: 520,
-            indexId: const IdUid(1, 3252969074149544698),
-            relationTarget: 'Day'),
         ModelProperty(
             id: const IdUid(5, 4059049783231314649),
             name: 'mealType',
@@ -102,54 +73,22 @@ ModelDefinition getObjectBoxModel() {
       lastIndexId: const IdUid(1, 3252969074149544698),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [],
-      retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredEntityUids: const [7735410333144087890],
+      retiredIndexUids: const [3252969074149544698],
+      retiredPropertyUids: const [
+        7930954151443410082,
+        4252877789476809213,
+        6600495818865029964
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
 
   final bindings = <Type, EntityDefinition>{
-    Day: EntityDefinition<Day>(
-        model: _entities[0],
-        toOneRelations: (Day object) => [],
-        toManyRelations: (Day object) => {
-              RelInfo<Meal>.toOneBacklink(
-                  4, object.id, (Meal srcObject) => srcObject.day): object.meals
-            },
-        getId: (Day object) => object.id,
-        setId: (Day object, int id) {
-          object.id = id;
-        },
-        objectToFB: (Day object, fb.Builder fbb) {
-          fbb.startTable(3);
-          fbb.addInt64(0, object.id);
-          fbb.addInt64(1, object.date?.millisecondsSinceEpoch);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final dateValue =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 6);
-          final object = Day(
-              date: dateValue == null
-                  ? null
-                  : DateTime.fromMillisecondsSinceEpoch(dateValue),
-              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0));
-          InternalToManyAccess.setRelInfo(
-              object.meals,
-              store,
-              RelInfo<Meal>.toOneBacklink(
-                  4, object.id, (Meal srcObject) => srcObject.day),
-              store.box<Day>());
-          return object;
-        }),
     Meal: EntityDefinition<Meal>(
-        model: _entities[1],
-        toOneRelations: (Meal object) => [object.day],
+        model: _entities[0],
+        toOneRelations: (Meal object) => [],
         toManyRelations: (Meal object) => {},
         getId: (Meal object) => object.id,
         setId: (Meal object, int id) {
@@ -163,7 +102,6 @@ ModelDefinition getObjectBoxModel() {
           fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.date.millisecondsSinceEpoch);
           fbb.addOffset(2, foodsIdsOffset);
-          fbb.addInt64(3, object.day.targetId);
           fbb.addOffset(4, mealTypeOffset);
           fbb.finish(fbb.endTable());
           return object.id;
@@ -182,9 +120,7 @@ ModelDefinition getObjectBoxModel() {
                       fb.StringReader(asciiOptimization: true),
                       lazy: false)
                   .vTableGet(buffer, rootOffset, 8, []));
-          object.day.targetId =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
-          object.day.attach(store);
+
           return object;
         })
   };
@@ -192,30 +128,18 @@ ModelDefinition getObjectBoxModel() {
   return ModelDefinition(model, bindings);
 }
 
-/// [Day] entity fields to define ObjectBox queries.
-class Day_ {
-  /// see [Day.id]
-  static final id = QueryIntegerProperty<Day>(_entities[0].properties[0]);
-
-  /// see [Day.date]
-  static final date = QueryIntegerProperty<Day>(_entities[0].properties[1]);
-}
-
 /// [Meal] entity fields to define ObjectBox queries.
 class Meal_ {
   /// see [Meal.id]
-  static final id = QueryIntegerProperty<Meal>(_entities[1].properties[0]);
+  static final id = QueryIntegerProperty<Meal>(_entities[0].properties[0]);
 
   /// see [Meal.date]
-  static final date = QueryIntegerProperty<Meal>(_entities[1].properties[1]);
+  static final date = QueryIntegerProperty<Meal>(_entities[0].properties[1]);
 
   /// see [Meal.foodsIds]
   static final foodsIds =
-      QueryStringVectorProperty<Meal>(_entities[1].properties[2]);
-
-  /// see [Meal.day]
-  static final day = QueryRelationToOne<Meal, Day>(_entities[1].properties[3]);
+      QueryStringVectorProperty<Meal>(_entities[0].properties[2]);
 
   /// see [Meal.mealType]
-  static final mealType = QueryStringProperty<Meal>(_entities[1].properties[4]);
+  static final mealType = QueryStringProperty<Meal>(_entities[0].properties[3]);
 }
