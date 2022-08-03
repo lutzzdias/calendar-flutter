@@ -8,17 +8,17 @@ class MealRepository with ChangeNotifier {
   MealRepository(this.database);
 
   int createMeal(Meal meal) {
-    // TODO: Implement Create operation in database
     database.mealBox.put(meal);
     return meal.id;
   }
 
   Meal? getMealById(int id) {
-    // TODO: Implement GetById operation in database
     return database.mealBox.get(id);
   }
 
-  // TODO: Implement GetAll
+  List<Meal> getAllMeals() {
+    return database.mealBox.getAll();
+  }
 
   void updateMeal(Meal meal) {
     // TODO: Implement Update operation in database
