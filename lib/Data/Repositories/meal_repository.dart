@@ -1,4 +1,4 @@
-import 'package:calendar/Domain/Enums/meal_type_enum.dart';
+import 'package:calendar/Data/Database/objectbox.dart';
 import 'package:calendar/Domain/Models/meal.dart';
 
 class MealRepository {
@@ -6,9 +6,9 @@ class MealRepository {
     // TODO: Implement Create operation in database
   }
 
-  Meal getMealById(String id) {
+  Meal getMealById(int id) {
     // TODO: Implement GetById operation in database
-    return Meal(id: 'null', date: DateTime.now(), mealType: MealType.snack);
+    return Meal(date: DateTime.now(), mealType: "snack");
   }
 
   // TODO: Implement GetAll
@@ -17,7 +17,7 @@ class MealRepository {
     // TODO: Implement Update operation in database
   }
 
-  void deleteMeal(String id) {
+  void deleteMeal(int id) {
     // TODO: Implement Delete operation in database
   }
 }

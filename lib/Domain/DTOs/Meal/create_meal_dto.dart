@@ -3,7 +3,7 @@ import 'package:calendar/Domain/Models/meal.dart';
 
 class CreateMealDTO {
   DateTime date;
-  MealType mealType;
+  String mealType;
   List<String> foodsIds;
 
   CreateMealDTO({
@@ -11,6 +11,11 @@ class CreateMealDTO {
     required this.mealType,
     List<String>? foodsIds,
   }) : foodsIds = foodsIds ?? List.empty(growable: true);
+
+  CreateMealDTO.fromMeal(Meal meal)
+      : this.date = meal.date,
+        this.mealType = meal.mealType,
+        this.foodsIds = meal.foodsIds;
 
   Meal toMeal() {
     return Meal(date: date, mealType: mealType, foodsIds: foodsIds);

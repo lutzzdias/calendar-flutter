@@ -1,9 +1,14 @@
+import 'package:calendar/Data/Database/objectbox.dart';
 import 'package:calendar/Domain/Models/day.dart';
 import 'package:calendar/Presentation/Pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+late ObjectBox objectBox;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  objectBox = await ObjectBox.create();
   runApp(const MyApp());
 }
 

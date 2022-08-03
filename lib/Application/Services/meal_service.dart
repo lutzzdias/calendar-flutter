@@ -18,7 +18,7 @@ class MealService {
     return MealResponseDTO(statusCode: 201, meal: meal);
   }
 
-  MealDTO? getMealById(String id) {
+  MealDTO? getMealById(int id) {
     Meal? meal = _mealRepository.getMealById(id);
 
     if (meal != null) {
@@ -46,7 +46,7 @@ class MealService {
     return MealResponseDTO(statusCode: 200, meal: meal);
   }
 
-  MealResponseDTO deleteMeal(String id) {
+  MealResponseDTO deleteMeal(int id) {
     bool isMealInDatabase = getMealById(id) != null;
 
     if (isMealInDatabase) {
