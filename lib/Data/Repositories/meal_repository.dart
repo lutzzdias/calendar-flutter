@@ -20,7 +20,8 @@ class MealRepository with ChangeNotifier {
     return database.mealBox.getAll();
   }
 
-  void deleteMeal(int id) {
+  bool deleteMeal(int id) {
     // TODO: Implement Delete operation in database
+    return database.mealBox.remove(id);
   }
 }
