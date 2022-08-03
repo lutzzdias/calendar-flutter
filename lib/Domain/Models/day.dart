@@ -4,6 +4,7 @@ import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:objectbox/objectbox.dart';
 
+// TODO: Remove this class laterrrrr
 @Entity()
 class Day extends ChangeNotifier {
   @Id()

@@ -29,7 +29,7 @@ class MealService {
   }
 
   MealResponseDTO updateMeal(MealDTO mealDTO) {
-    MealDTO? mealInDatabase = getMealById(mealDTO.id!);
+    MealDTO? mealInDatabase = getMealById(mealDTO.id);
 
     if (mealInDatabase == null) {
       var response =
