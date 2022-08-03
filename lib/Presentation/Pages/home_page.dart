@@ -14,12 +14,13 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             HomeButton(title: "Nutrição", nextScreen: CalendarPage()),
-            HomeButton(
+            const HomeButton(
                 title: "Psicologia", nextScreen: TestPage(title: "Psicologia")),
-            HomeButton(title: "Sono", nextScreen: TestPage(title: "Sono")),
-            HomeButton(
+            const HomeButton(
+                title: "Sono", nextScreen: TestPage(title: "Sono")),
+            const HomeButton(
                 title: "Medicina", nextScreen: TestPage(title: "Medicina")),
-            HomeButton(
+            const HomeButton(
                 title: "Jogo do Bicho",
                 nextScreen: TestPage(title: "Jogo do bicho"))
           ],

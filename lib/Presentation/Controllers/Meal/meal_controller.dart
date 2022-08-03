@@ -5,21 +5,21 @@ import 'package:calendar/Domain/DTOs/Meal/meal_response_dto.dart';
 
 class MealController {
   // TODO: Implement Dependency Injection
-  final MealService _mealService = MealService();
+  static final MealService _mealService = MealService();
 
-  MealResponseDTO createMeal(CreateMealDTO createMealDTO) {
+  static MealResponseDTO createMeal(CreateMealDTO createMealDTO) {
     return _mealService.createMeal(createMealDTO);
   }
 
-  MealDTO? getMealById(String id) {
+  static MealDTO? getMealById(int id) {
     return _mealService.getMealById(id);
   }
 
-  MealResponseDTO updateMeal(MealDTO mealDTO) {
+  static MealResponseDTO updateMeal(MealDTO mealDTO) {
     return _mealService.updateMeal(mealDTO);
   }
 
-  MealResponseDTO deleteMeal(String id) {
+  static MealResponseDTO deleteMeal(int id) {
     return _mealService.deleteMeal(id);
   }
 }

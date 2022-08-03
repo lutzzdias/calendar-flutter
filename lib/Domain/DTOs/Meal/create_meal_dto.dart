@@ -1,9 +1,8 @@
-import 'package:calendar/Domain/Enums/meal_type_enum.dart';
 import 'package:calendar/Domain/Models/meal.dart';
 
 class CreateMealDTO {
   DateTime date;
-  MealType mealType;
+  String mealType;
   List<String> foodsIds;
 
   CreateMealDTO({
@@ -11,6 +10,11 @@ class CreateMealDTO {
     required this.mealType,
     List<String>? foodsIds,
   }) : foodsIds = foodsIds ?? List.empty(growable: true);
+
+  CreateMealDTO.fromMeal(Meal meal)
+      : date = meal.date,
+        mealType = meal.mealType,
+        foodsIds = meal.foodsIds;
 
   Meal toMeal() {
     return Meal(date: date, mealType: mealType, foodsIds: foodsIds);

@@ -1,13 +1,14 @@
-import 'package:calendar/Domain/Enums/meal_type_enum.dart';
+import 'package:objectbox/objectbox.dart';
 
+@Entity()
 class Meal {
-  String? id;
+  int id;
   DateTime date;
-  MealType mealType;
+  String mealType;
   List<String> foodsIds;
 
   Meal({
-    this.id,
+    this.id = 0,
     required this.date,
     required this.mealType,
     List<String>? foodsIds,
