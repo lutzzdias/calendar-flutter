@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MealButton extends StatelessWidget {
-  late final MealController _mealController;
   final String title;
   final Icon icon;
   final DateTime date;
   final String mealType;
 
-  MealButton(
+  const MealButton(
       {Key? key,
       required this.title,
       required this.icon,
@@ -20,13 +19,14 @@ class MealButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _mealController = Provider.of<MealController>(context);
+    MealController mealController = Provider.of<MealController>(context);
+
     return TextButton.icon(
       style: TextButton.styleFrom(minimumSize: const Size.fromHeight(75)),
       onPressed: () {
-        final mealInDb = _mealController
+        final mealInDb = mealController
             .createMeal(CreateMealDTO(date: date, mealType: mealType));
-        print(_mealController.getMealById(mealInDb.meal!.id)!.id);
+        print(mealController.getMealById(mealInDb.meal!.id)!.id);
       },
       icon: icon,
       label: Text(title),
