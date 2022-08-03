@@ -1,13 +1,21 @@
+import 'package:calendar/Data/Database/objectbox.dart';
 import 'package:calendar/Domain/Models/meal.dart';
+import 'package:flutter/cupertino.dart';
 
-class MealRepository {
-  void createMeal(Meal meal) {
+class MealRepository with ChangeNotifier {
+  ObjectBox database;
+
+  MealRepository(this.database);
+
+  int createMeal(Meal meal) {
     // TODO: Implement Create operation in database
+    database.mealBox.put(meal);
+    return meal.id;
   }
 
-  Meal getMealById(int id) {
+  Meal? getMealById(int id) {
     // TODO: Implement GetById operation in database
-    return Meal(date: DateTime.now(), mealType: "snack");
+    return database.mealBox.get(id);
   }
 
   // TODO: Implement GetAll
