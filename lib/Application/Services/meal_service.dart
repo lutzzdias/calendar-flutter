@@ -18,7 +18,7 @@ class MealService {
     // TODO: Add validation
 
     // TODO: Define how to know which statusCode to return
-    meal.id = _mealRepository.createMeal(meal);
+    meal.id = _mealRepository.createOrUpdateMeal(meal);
     return MealResponseDTO(statusCode: 201, meal: meal);
   }
 
@@ -46,7 +46,7 @@ class MealService {
     // TODO: Add validation
 
     // TODO: Define how to know which statusCode to return
-    _mealRepository.updateMeal(meal);
+    _mealRepository.createOrUpdateMeal(meal);
     return MealResponseDTO(statusCode: 200, meal: meal);
   }
 

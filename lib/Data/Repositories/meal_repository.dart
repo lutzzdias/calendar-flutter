@@ -7,7 +7,7 @@ class MealRepository with ChangeNotifier {
 
   MealRepository(this.database);
 
-  int createMeal(Meal meal) {
+  int createOrUpdateMeal(Meal meal) {
     database.mealBox.put(meal);
     return meal.id;
   }
@@ -18,10 +18,6 @@ class MealRepository with ChangeNotifier {
 
   List<Meal> getAllMeals() {
     return database.mealBox.getAll();
-  }
-
-  void updateMeal(Meal meal) {
-    // TODO: Implement Update operation in database
   }
 
   void deleteMeal(int id) {
