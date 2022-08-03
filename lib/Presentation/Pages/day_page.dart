@@ -1,4 +1,3 @@
-import 'package:calendar/Domain/Enums/meal_type_enum.dart';
 import 'package:calendar/Domain/Models/day.dart';
 import 'package:calendar/Domain/Models/meal.dart';
 import 'package:calendar/Presentation/Widgets/DayPage/meal_button.dart';

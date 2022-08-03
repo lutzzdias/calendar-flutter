@@ -1,4 +1,3 @@
-import 'package:calendar/Data/Database/objectbox.dart';
 import 'package:calendar/Domain/Models/meal.dart';
 
 class MealRepository {
