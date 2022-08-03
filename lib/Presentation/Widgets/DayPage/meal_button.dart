@@ -1,4 +1,7 @@
+import 'package:calendar/Domain/DTOs/Meal/create_meal_dto.dart';
+import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MealButton extends StatelessWidget {
   final String title;
@@ -16,9 +19,15 @@ class MealButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MealController mealController = Provider.of<MealController>(context);
+
     return TextButton.icon(
       style: TextButton.styleFrom(minimumSize: const Size.fromHeight(75)),
-      onPressed: () => null,
+      onPressed: () {
+        final mealInDb = mealController
+            .createMeal(CreateMealDTO(date: date, mealType: mealType));
+        print(mealController.getMealById(mealInDb.meal!.id)!.id);
+      },
       icon: icon,
       label: Text(title),
     );

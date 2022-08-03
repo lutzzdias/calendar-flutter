@@ -1,6 +1,10 @@
+import 'package:objectbox/objectbox.dart';
+
+@Entity()
 class Food {
-  String id;
+  @Id()
+  int id;
   String description;
 
-  Food({required this.id, required this.description});
+  Food({this.id = 0, required this.description});
 }

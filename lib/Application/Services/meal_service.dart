@@ -1,3 +1,4 @@
+import 'package:calendar/Data/Database/objectbox.dart';
 import 'package:calendar/Data/Repositories/meal_repository.dart';
 import 'package:calendar/Domain/DTOs/Meal/create_meal_dto.dart';
 import 'package:calendar/Domain/DTOs/Meal/meal_dto.dart';
@@ -6,7 +7,10 @@ import 'package:calendar/Domain/Models/meal.dart';
 
 class MealService {
   // TODO: Implement Dependency Injection
-  final MealRepository _mealRepository = MealRepository();
+  final MealRepository _mealRepository;
+  ObjectBox database;
+
+  MealService(this.database) : _mealRepository = MealRepository(database);
 
   MealResponseDTO createMeal(CreateMealDTO createMealDTO) {
     Meal meal = createMealDTO.toMeal();
@@ -14,7 +18,7 @@ class MealService {
     // TODO: Add validation
 
     // TODO: Define how to know which statusCode to return
-    _mealRepository.createMeal(meal);
+    meal.id = _mealRepository.createOrUpdateMeal(meal);
     return MealResponseDTO(statusCode: 201, meal: meal);
   }
 
@@ -42,7 +46,7 @@ class MealService {
     // TODO: Add validation
 
     // TODO: Define how to know which statusCode to return
-    _mealRepository.updateMeal(meal);
+    _mealRepository.createOrUpdateMeal(meal);
     return MealResponseDTO(statusCode: 200, meal: meal);
   }
 

@@ -1,25 +1,34 @@
 import 'package:calendar/Data/Database/objectbox.dart';
+import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
 import 'package:calendar/Presentation/Pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 late ObjectBox objectBox;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   objectBox = await ObjectBox.create();
-  runApp(const MyApp());
+  runApp(MyApp(
+    database: objectBox,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final ObjectBox database;
+
+  const MyApp({Key? key, required this.database}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider(
+      create: (_) => MealController(database),
+      child: MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const HomePage(),
+        debugShowCheckedModeBanner: false,
       ),
-      home: const HomePage(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
