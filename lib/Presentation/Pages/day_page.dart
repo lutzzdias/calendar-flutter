@@ -1,5 +1,6 @@
 import 'package:calendar/Domain/DTOs/Meal/meal_dto.dart';
 import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
+import 'package:calendar/Presentation/Pages/edit_page.dart';
 import 'package:calendar/Presentation/Widgets/DayPage/meal_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -71,26 +72,34 @@ class _DayPageState extends State<DayPage> {
   Widget showMeal(BuildContext context, List<MealDTO> breakfast,
       MealController mealController) {
     return breakfast.isNotEmpty
-        ? Container(
-            padding: EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(breakfast.first.id.toString()),
-                    Text(breakfast.first.mealType),
-                    Text(breakfast.first.date.toString()),
-                  ],
-                ),
-                IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () => setState(
-                      () => mealController.deleteMeal(breakfast.first.id)),
-                )
-              ],
+        ? GestureDetector(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EditPage(
+                          meal: breakfast.first.toMeal(),
+                        ))),
+            child: Container(
+              padding: EdgeInsets.all(15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(breakfast.first.id.toString()),
+                      Text(breakfast.first.mealType),
+                      Text(breakfast.first.date.toString()),
+                    ],
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () => setState(
+                        () => mealController.deleteMeal(breakfast.first.id)),
+                  )
+                ],
+              ),
             ),
           )
         : const SizedBox(height: 10);
