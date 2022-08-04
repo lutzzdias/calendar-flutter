@@ -32,6 +32,17 @@ class MealService {
     }
   }
 
+  List<MealDTO> getAllMeals() {
+    final mealEntities = _mealRepository.getAllMeals();
+    final mealDTOs = List<MealDTO>.empty(growable: true);
+    mealEntities.forEach(
+      (element) {
+        mealDTOs.add(MealDTO.fromMeal(element));
+      },
+    );
+    return mealDTOs;
+  }
+
   MealResponseDTO updateMeal(MealDTO mealDTO) {
     MealDTO? mealInDatabase = getMealById(mealDTO.id);
 

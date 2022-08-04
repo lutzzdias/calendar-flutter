@@ -21,7 +21,6 @@ class MealRepository with ChangeNotifier {
   }
 
   bool deleteMeal(int id) {
-    // TODO: Implement Delete operation in database
     return database.mealBox.remove(id);
   }
 }

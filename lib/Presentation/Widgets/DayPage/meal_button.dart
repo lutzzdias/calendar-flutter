@@ -1,35 +1,39 @@
 import 'package:calendar/Domain/DTOs/Meal/create_meal_dto.dart';
 import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class MealButton extends StatelessWidget {
+class MealButton extends StatefulWidget {
   final String title;
   final Icon icon;
   final DateTime date;
   final String mealType;
+  final MealController mealController;
 
-  const MealButton(
-      {Key? key,
-      required this.title,
-      required this.icon,
-      required this.date,
-      required this.mealType})
-      : super(key: key);
+  const MealButton({
+    Key? key,
+    required this.title,
+    required this.icon,
+    required this.date,
+    required this.mealType,
+    required this.mealController,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    MealController mealController = Provider.of<MealController>(context);
+  State<MealButton> createState() => _MealButtonState();
+}
 
+class _MealButtonState extends State<MealButton> {
+  @override
+  Widget build(BuildContext context) {
     return TextButton.icon(
       style: TextButton.styleFrom(minimumSize: const Size.fromHeight(75)),
       onPressed: () {
-        final mealInDb = mealController
-            .createMeal(CreateMealDTO(date: date, mealType: mealType));
-        print(mealController.getMealById(mealInDb.meal!.id)!.id);
+        final mealInDb = widget.mealController.createMeal(
+            CreateMealDTO(date: widget.date, mealType: widget.mealType));
+        print(mealInDb.meal!.mealType);
       },
-      icon: icon,
-      label: Text(title),
+      icon: widget.icon,
+      label: Text(widget.title),
     );
   }
 }
