@@ -20,6 +20,10 @@ class MealController with ChangeNotifier {
     return _mealService.getMealById(id);
   }
 
+  List<MealDTO> getAllMeals() {
+    return _mealService.getAllMeals();
+  }
+
   MealResponseDTO updateMeal(MealDTO mealDTO) {
     return _mealService.updateMeal(mealDTO);
   }
