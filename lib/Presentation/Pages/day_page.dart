@@ -1,5 +1,4 @@
 import 'package:calendar/Domain/DTOs/Meal/meal_dto.dart';
-import 'package:calendar/Domain/Models/meal.dart';
 import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
 import 'package:calendar/Presentation/Pages/edit_page.dart';
 import 'package:calendar/Presentation/Widgets/DayPage/meal_button.dart';
