@@ -113,7 +113,7 @@ class _DayPageState extends State<DayPage> {
       MealController mealController) {
     return meals.isNotEmpty
         ? Container(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -138,7 +138,7 @@ class _DayPageState extends State<DayPage> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.delete),
+                  icon: const Icon(Icons.delete),
                   onPressed: () =>
                       setState(() => mealController.deleteMeal(meals.first.id)),
                 )

@@ -27,11 +27,8 @@ class _MealButtonState extends State<MealButton> {
   Widget build(BuildContext context) {
     return TextButton.icon(
       style: TextButton.styleFrom(minimumSize: const Size.fromHeight(75)),
-      onPressed: () {
-        final mealInDb = widget.mealController.createMeal(
-            CreateMealDTO(date: widget.date, mealType: widget.mealType));
-        print(mealInDb.meal!.mealType);
-      },
+      onPressed: () => widget.mealController.createMeal(
+          CreateMealDTO(date: widget.date, mealType: widget.mealType)),
       icon: widget.icon,
       label: Text(widget.title),
     );

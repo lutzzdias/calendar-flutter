@@ -6,31 +6,31 @@ import 'package:provider/provider.dart';
 
 class EditPage extends StatelessWidget {
   final Meal meal;
-  EditPage({Key? key, required this.meal}) : super(key: key);
+  const EditPage({Key? key, required this.meal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _mealTypeController =
+    final TextEditingController mealTypeController =
         TextEditingController(text: meal.mealType);
     MealController mealController = Provider.of<MealController>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit"),
+        title: const Text("Edit"),
       ),
       body: Column(
         children: [
-          Text("MealType"),
+          const Text("MealType"),
           TextField(
-            controller: _mealTypeController,
-            decoration: InputDecoration(hintText: "MealType"),
+            controller: mealTypeController,
+            decoration: const InputDecoration(hintText: "MealType"),
           ),
           TextButton(
             onPressed: () {
-              meal.mealType = _mealTypeController.text;
+              meal.mealType = mealTypeController.text;
               mealController.updateMeal(MealDTO.fromMeal(meal));
               Navigator.pop(context);
             },
-            child: Text("Update"),
+            child: const Text("Update"),
           )
         ],
       ),
