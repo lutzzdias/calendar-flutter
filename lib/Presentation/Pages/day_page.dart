@@ -131,9 +131,9 @@ class _DayPageState extends State<DayPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(meals.first.id.toString()),
-                      Text(meals.first.mealType),
-                      Text(meals.first.date.toString()),
+                      Text("ID = ${meals.first.id.toString()}"),
+                      Text("MealType = ${meals.first.mealType}"),
+                      Text("Date = ${meals.first.date.toString()}"),
                     ],
                   ),
                 ),

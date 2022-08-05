@@ -26,11 +26,18 @@ class _MealButtonState extends State<MealButton> {
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
-      style: TextButton.styleFrom(minimumSize: const Size.fromHeight(75)),
+      style: TextButton.styleFrom(
+          minimumSize: const Size.fromHeight(75),
+          backgroundColor: Colors.blue,
+          primary: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
       onPressed: () => widget.mealController.createMeal(
           CreateMealDTO(date: widget.date, mealType: widget.mealType)),
       icon: widget.icon,
-      label: Text(widget.title),
+      label: Text(
+        widget.title,
+      ),
     );
   }
 }
