@@ -31,6 +31,7 @@ class _DayPageState extends State<DayPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            SizedBox(height: 10),
             MealButton(
               title: "Café da manhã",
               icon: const Icon(Icons.breakfast_dining),
