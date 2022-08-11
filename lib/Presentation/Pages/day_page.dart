@@ -18,88 +18,132 @@ class _DayPageState extends State<DayPage> {
   @override
   Widget build(BuildContext context) {
     final mealController = Provider.of<MealController>(context);
-    List<MealDTO> breakfast = mealController
+    var breakfast = getBreakfast(mealController);
+    var lunch = getLunch(mealController);
+    var dinner = getDinner(mealController);
+    var snack = getSnacks(mealController);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("${widget.date.day}"),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(height: 10),
+            MealButton(
+              title: "Café da manhã",
+              icon: const Icon(Icons.breakfast_dining),
+              date: widget.date,
+              mealType: "breakfast",
+              mealController: mealController,
+            ),
+            showMeal(context, breakfast, mealController),
+            MealButton(
+              title: "Almoço",
+              icon: const Icon(Icons.lunch_dining),
+              date: widget.date,
+              mealType: "lunch",
+              mealController: mealController,
+            ),
+            showMeal(context, lunch, mealController),
+            MealButton(
+              title: "Jantar",
+              icon: const Icon(Icons.dinner_dining),
+              date: widget.date,
+              mealType: "dinner",
+              mealController: mealController,
+            ),
+            showMeal(context, dinner, mealController),
+            MealButton(
+              title: "Lanche",
+              icon: const Icon(Icons.fastfood),
+              date: widget.date,
+              mealType: "snack",
+              mealController: mealController,
+            ),
+            showMeal(context, snack, mealController),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<MealDTO> getBreakfast(MealController mealController) {
+    return mealController
         .getAllMeals()
         .where((element) => element.mealType == "breakfast")
         .where(
           (element) => element.date == widget.date,
         )
         .toList();
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("${widget.date.day}"),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          MealButton(
-            title: "Café da manhã",
-            icon: const Icon(Icons.breakfast_dining),
-            date: widget.date,
-            mealType: "breakfast",
-            mealController: mealController,
-          ),
-          showMeal(context, breakfast, mealController),
-          MealButton(
-            title: "Almoço",
-            icon: const Icon(Icons.lunch_dining),
-            date: widget.date,
-            mealType: "lunch",
-            mealController: mealController,
-          ),
-          const SizedBox(height: 10),
-          MealButton(
-            title: "Jantar",
-            icon: const Icon(Icons.dinner_dining),
-            date: widget.date,
-            mealType: "dinner",
-            mealController: mealController,
-          ),
-          const SizedBox(height: 10),
-          MealButton(
-            title: "Lanche",
-            icon: const Icon(Icons.fastfood),
-            date: widget.date,
-            mealType: "snack",
-            mealController: mealController,
-          ),
-        ],
-      ),
-    );
   }
 
-  Widget showMeal(BuildContext context, List<MealDTO> breakfast,
+  List<MealDTO> getLunch(MealController mealController) {
+    return mealController
+        .getAllMeals()
+        .where((element) => element.mealType == "lunch")
+        .where(
+          (element) => element.date == widget.date,
+        )
+        .toList();
+  }
+
+  List<MealDTO> getDinner(MealController mealController) {
+    return mealController
+        .getAllMeals()
+        .where((element) => element.mealType == "dinner")
+        .where(
+          (element) => element.date == widget.date,
+        )
+        .toList();
+  }
+
+  List<MealDTO> getSnacks(MealController mealController) {
+    return mealController
+        .getAllMeals()
+        .where((element) => element.mealType == "snack")
+        .where(
+          (element) => element.date == widget.date,
+        )
+        .toList();
+  }
+
+  Widget showMeal(BuildContext context, List<MealDTO> meals,
       MealController mealController) {
-    return breakfast.isNotEmpty
-        ? GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EditPage(
-                          meal: breakfast.first.toMeal(),
-                        ))),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+    return meals.isNotEmpty
+        ? Container(
+            padding: const EdgeInsets.all(15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // TODO: Make button extend to occupy as much space as possible
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditPage(
+                        meal: meals.first.toMeal(),
+                      ),
+                    ),
+                  ),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(breakfast.first.id.toString()),
-                      Text(breakfast.first.mealType),
-                      Text(breakfast.first.date.toString()),
+                      Text("ID = ${meals.first.id.toString()}"),
+                      Text("MealType = ${meals.first.mealType}"),
+                      Text("Date = ${meals.first.date.toString()}"),
                     ],
                   ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () => setState(
-                        () => mealController.deleteMeal(breakfast.first.id)),
-                  )
-                ],
-              ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () =>
+                      setState(() => mealController.deleteMeal(meals.first.id)),
+                )
+              ],
             ),
           )
         : const SizedBox(height: 10);

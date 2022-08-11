@@ -14,11 +14,16 @@ class CalendarDay extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
-            border: Border.all(width: 0.5),
-            borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.blue,
+        ),
         width: 50,
         height: 50,
-        child: Center(child: Text("${date.day}/${date.month}")),
+        child: Center(
+            child: Text(
+          "${date.day}/${date.month}",
+          style: const TextStyle(color: Colors.white),
+        )),
       ),
     );
   }

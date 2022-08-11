@@ -35,11 +35,9 @@ class MealService {
   List<MealDTO> getAllMeals() {
     final mealEntities = _mealRepository.getAllMeals();
     final mealDTOs = List<MealDTO>.empty(growable: true);
-    mealEntities.forEach(
-      (element) {
-        mealDTOs.add(MealDTO.fromMeal(element));
-      },
-    );
+    for (var element in mealEntities) {
+      mealDTOs.add(MealDTO.fromMeal(element));
+    }
     return mealDTOs;
   }
 

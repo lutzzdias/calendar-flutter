@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
                 title: "Medicina", nextScreen: TestPage(title: "Medicina")),
             const HomeButton(
                 title: "Jogo do Bicho",
-                nextScreen: TestPage(title: "Jogo do bicho"))
+                nextScreen: TestPage(title: "Vencedor: Cabra"))
           ],
         ),
       ),
