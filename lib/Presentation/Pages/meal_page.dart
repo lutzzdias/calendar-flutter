@@ -1,3 +1,4 @@
+import 'package:calendar/Domain/Models/food.dart';
 import 'package:flutter/material.dart';
 
 class MealPage extends StatelessWidget {
@@ -14,6 +15,7 @@ class MealPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("${date.day}/${date.month}/${date.year}"),
             Expanded(
@@ -22,16 +24,23 @@ class MealPage extends StatelessWidget {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4),
                 itemBuilder: (context, index) {
+                  Food food = Food(description: "teste $index", icon: "adb");
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.white60,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(child: Icon(Icons.add)),
+                    child: Column(
+                      children: [
+                        Icon(Icons.adb),
+                        Text(food.description),
+                      ],
+                    ),
                   );
                 },
               ),
-            )
+            ),
+            TextButton(onPressed: () => null, child: Text("Save")),
           ],
         ),
       ),

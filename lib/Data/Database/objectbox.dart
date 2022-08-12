@@ -1,6 +1,5 @@
 import 'package:calendar/Domain/Models/meal.dart';
-
-import '../../objectbox.g.dart';
+import 'package:calendar/objectbox.g.dart';
 
 class ObjectBox {
   late final Store _store;
