@@ -1,7 +1,9 @@
+import 'package:calendar/Domain/DTOs/Meal/create_meal_dto.dart';
 import 'package:calendar/Domain/DTOs/Meal/meal_dto.dart';
 import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
 import 'package:calendar/Presentation/Pages/edit_page.dart';
 import 'package:calendar/Presentation/Widgets/DayPage/meal_button.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,13 +33,14 @@ class _DayPageState extends State<DayPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             MealButton(
               title: "Café da manhã",
               icon: const Icon(Icons.breakfast_dining),
               date: widget.date,
               mealType: "breakfast",
               mealController: mealController,
+              onPressed: () => createMeal(mealController, "breakfast"),
             ),
             showMeal(context, breakfast, mealController),
             MealButton(
@@ -46,6 +49,7 @@ class _DayPageState extends State<DayPage> {
               date: widget.date,
               mealType: "lunch",
               mealController: mealController,
+              onPressed: () => createMeal(mealController, "lunch"),
             ),
             showMeal(context, lunch, mealController),
             MealButton(
@@ -54,6 +58,7 @@ class _DayPageState extends State<DayPage> {
               date: widget.date,
               mealType: "dinner",
               mealController: mealController,
+              onPressed: () => createMeal(mealController, "dinner"),
             ),
             showMeal(context, dinner, mealController),
             MealButton(
@@ -62,6 +67,7 @@ class _DayPageState extends State<DayPage> {
               date: widget.date,
               mealType: "snack",
               mealController: mealController,
+              onPressed: () => createMeal(mealController, "snack"),
             ),
             showMeal(context, snack, mealController),
           ],
@@ -70,82 +76,71 @@ class _DayPageState extends State<DayPage> {
     );
   }
 
-  List<MealDTO> getBreakfast(MealController mealController) {
-    return mealController
-        .getAllMeals()
-        .where((element) => element.mealType == "breakfast")
-        .where(
-          (element) => element.date == widget.date,
-        )
-        .toList();
+  MealDTO? getBreakfast(MealController mealController) {
+    return mealController.getAllMeals().firstWhereOrNull((element) =>
+        element.mealType == "breakfast" && element.date == widget.date);
   }
 
-  List<MealDTO> getLunch(MealController mealController) {
-    return mealController
-        .getAllMeals()
-        .where((element) => element.mealType == "lunch")
-        .where(
-          (element) => element.date == widget.date,
-        )
-        .toList();
+  MealDTO? getLunch(MealController mealController) {
+    return mealController.getAllMeals().firstWhereOrNull((element) =>
+        element.mealType == "lunch" && element.date == widget.date);
   }
 
-  List<MealDTO> getDinner(MealController mealController) {
-    return mealController
-        .getAllMeals()
-        .where((element) => element.mealType == "dinner")
-        .where(
-          (element) => element.date == widget.date,
-        )
-        .toList();
+  MealDTO? getDinner(MealController mealController) {
+    return mealController.getAllMeals().firstWhereOrNull((element) =>
+        element.mealType == "dinner" && element.date == widget.date);
   }
 
-  List<MealDTO> getSnacks(MealController mealController) {
-    return mealController
-        .getAllMeals()
-        .where((element) => element.mealType == "snack")
-        .where(
-          (element) => element.date == widget.date,
-        )
-        .toList();
+  MealDTO? getSnacks(MealController mealController) {
+    return mealController.getAllMeals().firstWhereOrNull((element) =>
+        element.mealType == "snack" && element.date == widget.date);
   }
 
-  Widget showMeal(BuildContext context, List<MealDTO> meals,
-      MealController mealController) {
-    return meals.isNotEmpty
+  Widget showMeal(
+      BuildContext context, MealDTO? meal, MealController mealController) {
+    return meal != null
         ? Container(
             padding: const EdgeInsets.all(15),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // TODO: Make button extend to occupy as much space as possible
-                GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditPage(
-                        meal: meals.first.toMeal(),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditPage(
+                          meal: meal.toMeal(),
+                        ),
                       ),
                     ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("ID = ${meals.first.id.toString()}"),
-                      Text("MealType = ${meals.first.mealType}"),
-                      Text("Date = ${meals.first.date.toString()}"),
-                    ],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text("ID = ${meal.id.toString()}"),
+                        Text("MealType = ${meal.mealType}"),
+                        Text("Date = ${meal.date.toString()}"),
+                      ],
+                    ),
                   ),
                 ),
                 IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () =>
-                      setState(() => mealController.deleteMeal(meals.first.id)),
+                      setState(() => mealController.deleteMeal(meal.id)),
                 )
               ],
             ),
           )
         : const SizedBox(height: 10);
+  }
+
+  createMeal(MealController mealController, String mealType) {
+    setState(
+      () => mealController.createMeal(
+        CreateMealDTO(date: widget.date, mealType: mealType),
+      ),
+    );
   }
 }

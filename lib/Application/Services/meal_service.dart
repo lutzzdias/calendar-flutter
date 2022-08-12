@@ -15,7 +15,13 @@ class MealService {
   MealResponseDTO createMeal(CreateMealDTO createMealDTO) {
     Meal meal = createMealDTO.toMeal();
 
-    // TODO: Add validation
+    if (_mealRepository
+        .getAllMeals()
+        .where((dbMeal) =>
+            dbMeal.date == meal.date && dbMeal.mealType == meal.mealType)
+        .isNotEmpty) {
+      return MealResponseDTO(statusCode: 404, meal: meal);
+    }
 
     // TODO: Define how to know which statusCode to return
     meal.id = _mealRepository.createOrUpdateMeal(meal);
