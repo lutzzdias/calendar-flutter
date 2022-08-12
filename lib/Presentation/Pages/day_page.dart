@@ -2,6 +2,7 @@ import 'package:calendar/Domain/DTOs/Meal/create_meal_dto.dart';
 import 'package:calendar/Domain/DTOs/Meal/meal_dto.dart';
 import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
 import 'package:calendar/Presentation/Pages/edit_page.dart';
+import 'package:calendar/Presentation/Pages/meal_page.dart';
 import 'package:calendar/Presentation/Widgets/DayPage/meal_button.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,15 @@ class _DayPageState extends State<DayPage> {
               date: widget.date,
               mealType: "snack",
               mealController: mealController,
-              onPressed: () => createMeal(mealController, "snack"),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MealPage(
+                    mealType: "snack",
+                    date: widget.date,
+                  ),
+                ),
+              ),
             ),
             showMeal(context, snack, mealController),
           ],
@@ -144,3 +153,14 @@ class _DayPageState extends State<DayPage> {
     );
   }
 }
+
+/*
+MealButton(
+              title: "Lanche",
+              icon: const Icon(Icons.fastfood),
+              date: widget.date,
+              mealType: "snack",
+              mealController: mealController,
+              onPressed: () => createMeal(mealController, "snack"),
+            ),
+ */
