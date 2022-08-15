@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 class FoodButton extends StatefulWidget {
   final Food food;
+  ValueChanged<bool> isToggled;
 
-  const FoodButton({Key? key, required this.food}) : super(key: key);
+  FoodButton({Key? key, required this.food, required this.isToggled})
+      : super(key: key);
 
   @override
   State<FoodButton> createState() => _FoodButtonState();
@@ -19,6 +21,7 @@ class _FoodButtonState extends State<FoodButton> {
       onTap: () {
         setState(() {
           isToggled = !isToggled;
+          widget.isToggled(isToggled);
         });
       },
       child: Container(
