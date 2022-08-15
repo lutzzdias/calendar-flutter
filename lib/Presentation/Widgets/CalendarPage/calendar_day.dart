@@ -18,17 +18,18 @@ class CalendarDay extends StatelessWidget {
         margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: isEmpty(mealController) ? Colors.white : Colors.blue,
+          color: isEmpty(mealController) ? Colors.blue.shade50 : Colors.blue,
         ),
         width: 50,
         height: 50,
         child: Center(
-            child: Text(
-          "${date.day}/${date.month}",
-          style: TextStyle(
-            color: isEmpty(mealController) ? Colors.black : Colors.white,
+          child: Text(
+            "${date.day}/${date.month}",
+            style: TextStyle(
+              color: isEmpty(mealController) ? Colors.black : Colors.white,
+            ),
           ),
-        )),
+        ),
       ),
     );
   }

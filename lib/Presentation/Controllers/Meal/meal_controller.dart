@@ -3,6 +3,7 @@ import 'package:calendar/Data/Database/objectbox.dart';
 import 'package:calendar/Domain/DTOs/Meal/create_meal_dto.dart';
 import 'package:calendar/Domain/DTOs/Meal/meal_dto.dart';
 import 'package:calendar/Domain/DTOs/Meal/meal_response_dto.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 
 class MealController with ChangeNotifier {
@@ -18,6 +19,11 @@ class MealController with ChangeNotifier {
 
   MealDTO? getMealById(int id) {
     return _mealService.getMealById(id);
+  }
+
+  MealDTO? getMealByMealTypeAndDate(String mealType, DateTime date) {
+    return getAllMeals().firstWhereOrNull(
+        (element) => element.mealType == mealType && element.date == date);
   }
 
   List<MealDTO> getAllMeals() {

@@ -1,5 +1,4 @@
 import 'package:calendar/Domain/Models/food.dart';
-import 'package:calendar/Domain/Models/meal.dart';
 import 'package:calendar/Presentation/Widgets/MealPage/food_button.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +6,7 @@ class MealPage extends StatefulWidget {
   final String mealType;
   final DateTime date;
 
-  MealPage({Key? key, required this.mealType, required this.date})
+  const MealPage({Key? key, required this.mealType, required this.date})
       : super(key: key);
 
   @override
@@ -15,7 +14,17 @@ class MealPage extends StatefulWidget {
 }
 
 class _MealPageState extends State<MealPage> {
-  List<int> selected = List.empty(growable: true);
+  List<Food> selected = List.empty(growable: true);
+  List<Food> foods = [
+    Food(icon: '0xe037', description: 'floco de neve'),
+    Food(icon: '0xee30', description: 'cadeirante veloz'),
+    Food(icon: '0xe06e', description: 'avião'),
+    Food(icon: '0xe07e', description: 'infinito'),
+    Food(icon: '0xe084', description: 'âncora'),
+    Food(icon: '0xf04be', description: 'apple'),
+    Food(icon: '0xe090', description: 'compasso'),
+    Food(icon: '0xe0b2', description: 'money'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +41,18 @@ class _MealPageState extends State<MealPage> {
             const SizedBox(height: 10),
             GridView.builder(
               shrinkWrap: true,
-              itemCount: 10,
+              itemCount: foods.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4),
               itemBuilder: (context, index) {
-                Food food = Food(description: "test $index", icon: "adb");
                 return FoodButton(
-                  food: food,
+                  food: foods[index],
                   isToggled: (bool value) {
                     setState(() {
                       if (value) {
-                        selected.add(index);
+                        selected.add(foods[index]);
                       } else {
-                        selected.remove(index);
+                        selected.remove(foods[index]);
                       }
                     });
                   },
@@ -61,11 +69,9 @@ class _MealPageState extends State<MealPage> {
                     horizontal: 25,
                   )),
               onPressed: () {
-                Meal meal = Meal(
-                  mealType: widget.mealType,
-                  date: widget.date,
-                );
-                meal.foods.add(Food(description: 'teste', icon: 'adb'));
+                for (Food food in selected) {
+                  print(food.description);
+                }
               },
               child: const Text("Save"),
             ),

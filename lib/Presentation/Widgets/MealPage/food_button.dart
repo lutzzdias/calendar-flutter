@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class FoodButton extends StatefulWidget {
   final Food food;
-  ValueChanged<bool> isToggled;
+  final ValueChanged<bool> isToggled;
 
-  FoodButton({Key? key, required this.food, required this.isToggled})
+  const FoodButton({Key? key, required this.food, required this.isToggled})
       : super(key: key);
 
   @override
@@ -35,12 +35,14 @@ class _FoodButtonState extends State<FoodButton> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
-              Icons.adb,
+              IconData(int.parse(widget.food.icon),
+                  fontFamily: 'MaterialIcons'),
               color: isToggled ? Colors.white : Colors.black,
             ),
             const SizedBox(height: 7),
             Text(
               widget.food.description,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: isToggled ? Colors.white : Colors.black,
               ),

@@ -1,21 +1,14 @@
-import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
 import 'package:flutter/material.dart';
 
 class MealButton extends StatefulWidget {
   final String title;
   final Icon icon;
-  final DateTime date;
-  final String mealType;
-  final MealController mealController;
   final Function()? onPressed;
 
   const MealButton({
     Key? key,
     required this.title,
     required this.icon,
-    required this.date,
-    required this.mealType,
-    required this.mealController,
     required this.onPressed,
   }) : super(key: key);
 
