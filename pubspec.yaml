@@ -39,6 +39,7 @@ dependencies:
   objectbox_flutter_libs: ^1.6.0
   build_runner: ^2.2.0
   objectbox_generator: ^1.6.0
+  collection: ^1.16.0
 
 dev_dependencies:
   flutter_test:

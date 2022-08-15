@@ -1,4 +1,6 @@
 import 'package:calendar/Domain/Models/food.dart';
+import 'package:calendar/Domain/Models/meal.dart';
+import 'package:calendar/Presentation/Widgets/MealPage/food_button.dart';
 import 'package:flutter/material.dart';
 
 class MealPage extends StatelessWidget {
@@ -15,32 +17,38 @@ class MealPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            const SizedBox(height: 15),
             Text("${date.day}/${date.month}/${date.year}"),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 10,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4),
-                itemBuilder: (context, index) {
-                  Food food = Food(description: "teste $index", icon: "adb");
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white60,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        Icon(Icons.adb),
-                        Text(food.description),
-                      ],
-                    ),
-                  );
-                },
-              ),
+            const SizedBox(height: 10),
+            GridView.builder(
+              shrinkWrap: true,
+              itemCount: 10,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4),
+              itemBuilder: (context, index) {
+                Food food = Food(description: "test $index", icon: "adb");
+                return FoodButton(food: food);
+              },
             ),
-            TextButton(onPressed: () => null, child: Text("Save")),
+            const SizedBox(height: 10),
+            TextButton(
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  primary: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 25,
+                  )),
+              onPressed: () {
+                Meal(
+                  mealType: mealType,
+                  date: date,
+                );
+              },
+              child: const Text("Save"),
+            ),
           ],
         ),
       ),
