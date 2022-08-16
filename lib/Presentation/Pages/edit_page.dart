@@ -4,14 +4,19 @@ import 'package:calendar/Presentation/Controllers/Meal/meal_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class EditPage extends StatelessWidget {
+class EditPage extends StatefulWidget {
   final Meal meal;
   const EditPage({Key? key, required this.meal}) : super(key: key);
 
   @override
+  State<EditPage> createState() => _EditPageState();
+}
+
+class _EditPageState extends State<EditPage> {
+  @override
   Widget build(BuildContext context) {
     final TextEditingController mealTypeController =
-        TextEditingController(text: meal.mealType);
+        TextEditingController(text: widget.meal.mealType);
     MealController mealController = Provider.of<MealController>(context);
     return Scaffold(
       appBar: AppBar(
@@ -19,15 +24,27 @@ class EditPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Text("MealType"),
-          TextField(
-            controller: mealTypeController,
-            decoration: const InputDecoration(hintText: "MealType"),
+          SizedBox(height: 15),
+          Text("MealType - ${widget.meal.mealType}"),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: widget.meal.foods.length,
+            itemBuilder: (context, index) => ListTile(
+              title: Text(widget.meal.foods[index].description),
+              leading: Icon(
+                IconData(int.parse(widget.meal.foods[index].icon),
+                    fontFamily: 'MaterialIcons'),
+              ),
+              trailing: GestureDetector(
+                child: Icon(Icons.delete),
+                onTap: () => setState(() => widget.meal.foods.removeAt(index)),
+              ),
+            ),
           ),
           TextButton(
             onPressed: () {
-              meal.mealType = mealTypeController.text;
-              mealController.updateMeal(MealDTO.fromMeal(meal));
+              widget.meal.mealType = mealTypeController.text;
+              mealController.updateMeal(MealDTO.fromMeal(widget.meal));
               Navigator.pop(context);
             },
             child: const Text("Update"),

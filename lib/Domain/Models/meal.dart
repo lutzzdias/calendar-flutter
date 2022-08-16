@@ -7,11 +7,14 @@ class Meal {
   int id;
   DateTime date;
   String mealType;
-  final ToMany<Food> foods = ToMany<Food>();
+  ToMany<Food> foods = ToMany<Food>();
 
   Meal({
     this.id = 0,
     required this.date,
     required this.mealType,
-  });
+    List<Food>? foods,
+  }) {
+    if (foods != null) this.foods.addAll(foods);
+  }
 }

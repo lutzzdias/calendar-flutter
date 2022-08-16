@@ -41,25 +41,26 @@ class _DayPageState extends State<DayPage> {
             MealButton(
               title: "Café da manhã",
               icon: const Icon(Icons.breakfast_dining),
-              onPressed: () => createMeal(mealController, "breakfast"),
+              onPressed: () =>
+                  goToMealPage(context, 'breakfast', mealController),
             ),
             showMeal(context, breakfast, mealController),
             MealButton(
               title: "Almoço",
               icon: const Icon(Icons.lunch_dining),
-              onPressed: () => createMeal(mealController, "lunch"),
+              onPressed: () => goToMealPage(context, 'lunch', mealController),
             ),
             showMeal(context, lunch, mealController),
             MealButton(
-              title: "Jantar",
-              icon: const Icon(Icons.dinner_dining),
-              onPressed: () => createMeal(mealController, "dinner"),
-            ),
+                title: "Jantar",
+                icon: const Icon(Icons.dinner_dining),
+                onPressed: () =>
+                    goToMealPage(context, 'dinner', mealController)),
             showMeal(context, dinner, mealController),
             MealButton(
               title: "Lanche",
               icon: const Icon(Icons.fastfood),
-              onPressed: () => goToMealPage(context),
+              onPressed: () => goToMealPage(context, 'snack', mealController),
             ),
             showMeal(context, snack, mealController),
           ],
@@ -119,13 +120,17 @@ class _DayPageState extends State<DayPage> {
     setState(() => mealController.deleteMeal(mealId));
   }
 
-  Future goToMealPage(BuildContext context) {
+  Future goToMealPage(
+      BuildContext context, String mealType, MealController mealController) {
     return Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => MealPage(
-          mealType: "snack",
+          mealType: mealType,
           date: widget.date,
+          onPressed: () {
+            createMeal(mealController, mealType);
+          },
         ),
       ),
     );
